@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JS (IMPORTANT: defer) -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div class="app">
+
+        <h1>Weather App 🌤</h1>
+
+        <!-- SEARCH FORM -->
+        <form id="searchForm">
+            <input 
+                type="text" 
+                id="cityInput" 
+                placeholder="Enter city (e.g. Delhi)"
+                required
+            >
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- LOADING MESSAGE -->
+        <p id="loading" class="hidden">Loading weather...</p>
+
+        <!-- WEATHER DISPLAY -->
+        <div id="weatherContainer" class="hidden">
+            <h2 id="cityName"></h2>
+            <p id="temperature"></p>
+            <p id="condition"></p>
+            <p id="humidity"></p>
+            <img id ="weatherview" src="" alt="weather-view">
+        </div>
+
+        <!-- ERROR -->
+        <p id="error" class="hidden">City not found !</p>
+
+    </div>
+
+</body>
+</html>
