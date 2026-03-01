@@ -9,12 +9,39 @@ const errorMsg = document.getElementById("error");
 const weatherGif = document.getElementById("weatherview");
 
 
-  width: 100%;
-    max-width: 260px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-top: 15px;
+ //function to get the giphy 
+ async function getGif(conditionText) {
+
+    const giphyKey = "zZVqkr7saaX4GahvOo9JlM4VlUaETDsI";
+
+    // convert to simple keyword (important!)
+    let keyword = conditionText.toLowerCase();
+
+    if (keyword.includes("rain")) keyword = "rain";
+    else if (keyword.includes("cloud")) keyword = "cloudy weather";
+    else if (keyword.includes("snow")) keyword = "snow weather";
+    else if (keyword.includes("clear")) keyword = "sunny weather";
+    else keyword = "weather";
+
+    const gifURL = `https://api.giphy.com/v1/gifs/translate?api_key=${giphyKey}&s=${keyword}`;
+
+    try {
+        const response = await fetch(gifURL);
+        if(!response.ok){
+            throw new Error("not avilable");
+            
+        }
+        const gifData = await response.json();
+
+        const imageUrl = gifData.data.images.original.url;
+
+        weatherGif.src = imageUrl;
+        weatherGif.classList.remove("hidden");
+
+    } catch (error) {
+        console.log("GIF error:", error);
+    }
+}
 async function getweather(city) {
     try {const apikey = "4UBY32RPF6BD492E8BW9HHYFC";
     const baseurl = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
